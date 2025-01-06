@@ -140,13 +140,13 @@ reset.addEventListener("click", () => resetBoard());
 
 function resetBoard() {
   const x = document.querySelectorAll(".container div");
-  console.log("===", board);
+  //console.log("===", board);
   board.map((b) => console.log(b));
   currentPlayer = playerOne;
 
   columns = [5, 5, 5, 5, 5, 5, 5];
   for (let i = 0; i < x.length; i++) {
-    console.log(x[i]);
+    // console.log(x[i]);
     x[i].classList.remove("yellow");
     x[i].classList.remove("red");
   }

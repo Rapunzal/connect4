@@ -1,7 +1,7 @@
 const playerOne = "R";
 const playerTwo = "Y";
 let currentPlayer = playerOne;
-const winner = document.getElementById("winner");
+const player = document.getElementById("player");
 let board;
 let gameOver = false;
 var currColumns = []; //keeps track of which row each column is at.
@@ -17,11 +17,11 @@ function createBoard() {
     let row = [];
     for (let j = 0; j < cols; j++) {
       row.push(" ");
-      const tile = document.createElement("div");
-      tile.classList.add("tile");
-      tile.id = i + "-" + j;
-      tile.addEventListener("click", setColor);
-      container.appendChild(tile);
+      const disk = document.createElement("div");
+      disk.classList.add("disk");
+      disk.id = i + "-" + j;
+      disk.addEventListener("click", setColor);
+      container.appendChild(disk);
     }
     board.push(row);
   }
@@ -127,9 +127,36 @@ function setWinner(r, c) {
   console.log(playerOne, " board[r][c] ", board[r][c]);
   console.log(playerTwo);
   if (board[r][c] == playerOne) {
-    winner.innerText = "Red Wins!";
+    player.innerText = "Red Wins!";
   } else if (board[r][c] == playerTwo) {
-    winner.innerText = "Yellow Wins!";
+    player.innerText = "Yellow Wins!";
   }
   gameOver = true;
+}
+
+const reset = document.getElementById("reset");
+
+reset.addEventListener("click", () => resetBoard());
+
+function resetBoard() {
+  const x = document.querySelectorAll(".container div");
+  console.log("===", board);
+  board.map((b) => console.log(b));
+  currentPlayer = playerOne;
+
+  columns = [5, 5, 5, 5, 5, 5, 5];
+  for (let i = 0; i < x.length; i++) {
+    console.log(x[i]);
+    x[i].classList.remove("yellow");
+    x[i].classList.remove("red");
+  }
+  board = [];
+  for (let i = 0; i < rows; i++) {
+    let row = [];
+    for (let j = 0; j < cols; j++) {
+      row.push(" ");
+    }
+    board.push(row);
+  }
+  console.log("2nd board====", board);
 }
